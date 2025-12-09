@@ -17,7 +17,6 @@ app = Flask(__name__)
 #
 after_date = (datetime.now() - timedelta(days=3)).strftime("%Y-%m-%d")
 
-s3 = boto3.client("s3")
 
 SERPER_API_KEY = os.getenv("SERPER_API_KEY")
 BRAVE_API_KEY = os.getenv("BRAVE_API_KEY")
@@ -44,11 +43,7 @@ def normalize_brave(item):
          "source": item.get("meta_url", {}).get("hostname", "Brave"),
     }
 
-def load_posts():
-    if os.path.exists(S3_BLOG_FILE):
-        with open(S3_BLOG_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return []
+
 
 
 
