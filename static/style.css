@@ -1,0 +1,52 @@
+body {
+  font-family: sans-serif;
+  background: #fafafa;
+  margin: 20px;
+}
+.columns {
+  display: flex;
+  gap: 20px;
+}
+.column {
+  flex: 1;
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.card {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+}
+.source {
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 3px;
+}
+.thumbnail {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px;
+    border-radius: 6px;
+}
+.article-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 15px auto;
+    border-radius: 6px;
+}
+.article-content {
+    line-height: 1.8;
+    word-break: break-word;
+    white-space: normal;
+}
+
+.post-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}

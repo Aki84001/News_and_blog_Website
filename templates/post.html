@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ post.title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header class="site-header"></header>
+    <a href="/">
+        <img src="{{ url_for('static', filename='images/galdtitle.png') }}" alt="My News Hub">
+    </a>
+</header>
+
+<div class="post-wrapper">
+
+    <h1>{{ post.title }}</h1>
+
+    {% if post.thumbnail %}
+        <img src="{{ post.thumbnail }}" alt="サムネイル" class="thumbnail">
+    {% endif %}
+
+    {% if post.tags %}
+        <p class="tags">タグ: {{ post.tags | join(', ') }}</p>
+    {% endif %}
+
+    <div class="article-content">
+        {{ html_content|safe }}
+    </div>
+
+</div>
+
+<p><a href="/">戻る</a></p>
+
+</body>
+</html>

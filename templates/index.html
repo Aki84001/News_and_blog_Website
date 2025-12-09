@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>My News Hub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<h1>
+    <img src="/static/images/galdtitle.png" alt="My News Hub">　
+</h1>
+
+<div class="columns">
+    <div class="column">
+        <h2>ニュース (気になるニュース)</h2>
+        {% for a in news %}
+            <div class="card">
+                <a href="{{ a.link }}" target="_blank">{{ a.title }}</a>
+                {% if a.source %}
+                    <p class="source">出典：{{ a.source }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="column">
+        <h2>おすすめ記事</h2>
+        {% for a in rss %}
+            <div class="card">
+                <a href="{{ a.link }}" target="_blank">{{ a.title }}</a>
+          {% if a.source %}
+              <p class="source">出典：{{ a.source }}</p>
+          {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+<div class="column">
+    <h2>ブログ</h2>
+    {% for p in blog %}
+    <div class="card">
+        <a href="/post/{{ p.id }}">
+            {% if p.thumbnail %}
+                <img src="{{ p.thumbnail }}" style="width: 150px;">
+            {% endif %}
+            <p>{{ p.title }}</p>
+        </a>
+    </div>
+    {% endfor %}
+
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>新規投稿</title>
+</head>
+<body>
+    <h1>新規記事の投稿</h1>
+
+    <form method="POST">
+        <p>パスワード：<input type="password" name="password"></p>
+        <p>タイトル：<input type="text" name="title"></p>
+        <p>サムネ画像URL：<input type="text" name="thumbnail"></p>
+        <p>タグ（カンマ区切り）：<input type="text" name="tags"></p>
+        <p>記事内画像（カンマ区切り）：<input type="text" name="images"></p>
+
+        <p>本文：</p>
+        <textarea name="content" rows="10" cols="50"></textarea>
+
+        <p><button type="submit">投稿する</button></p>
+    </form>
+
+    <p><a href="/">戻る</a></p>
+</body>
+</html>
