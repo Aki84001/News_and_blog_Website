@@ -24,7 +24,10 @@ BRAVE_API_KEY = os.getenv("BRAVE_API_KEY")
 SERPER_API_URL = os.getenv("SERPER_API_URL")
 BRAVE_NEWS_URL = os.getenv("BRAVE_NEWS_URL")
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
-S3_BUCKET = os.getenv("S3_BUCKET")
+S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")
+S3_BLOG_FILE = "blog_posts.json"
+
+
 
 # ====== APIの取得結果フォーマットの統合 ======
 def normalize_serper(item):
@@ -42,8 +45,8 @@ def normalize_brave(item):
     }
 
 def load_posts():
-    if os.path.exists(BLOG_FILE):
-        with open(BLOG_FILE, "r", encoding="utf-8") as f:
+    if os.path.exists(S3_BLOG_FILE):
+        with open(S3_BLOG_FILE, "r", encoding="utf-8") as f:
             return json.load(f)
     return []
 
@@ -55,8 +58,8 @@ def save_blog_post(post):
 
     try:
         s3.put_object(
-            Bucket=S3_BUCKET,
-            Key=BLOG_FILE,
+            Bucket=S3_BUCKET_NAME,
+            Key=S3_BLOG_FILE,
             Body=json.dumps(posts, ensure_ascii=False, indent=2).encode("utf-8"),
             ContentType="application/json"
         )
@@ -68,7 +71,7 @@ def save_blog_post(post):
 def load_blog_posts():
 
     try:
-        obj = s3.get_object(Bucket=S3_BUCKET, Key=BLOG_FILE)
+        obj = s3.get_object(Bucket=S3_BUCKET_NAME, Key=S3_BLOG_FILE)
         data = obj["Body"].read().decode("utf-8")
         return json.loads(data)
     except s3.exceptions.NoSuchKey:
