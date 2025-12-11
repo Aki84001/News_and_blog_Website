@@ -54,7 +54,7 @@ body {
 .site-logo {
     margin: 0;
     padding: 0;
-    text-align: center;
+    text-align: left;  
 }
 
 .site-logo img {
