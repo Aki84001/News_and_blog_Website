@@ -52,7 +52,7 @@ body {
 }
 
 .site-logo {
-    max-width: 200px;   /* ここで上限指定 */
+    max-width: auto;   /* ここで上限指定 */
     width: 50%;
-    max-height: 50px;
+    max-height: 200px;
 }
