@@ -54,5 +54,5 @@ body {
 .site-logo {
     max-width: 200px;   /* ここで上限指定 */
     width: 50%;
-    height: auto;
+    max-height: 50px;
 }
