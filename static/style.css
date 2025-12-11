@@ -52,6 +52,14 @@ body {
 }
 
 .site-logo {
-    width: 50px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.site-logo img {
+    width: 200px;   
     height: auto;
+    display: block;
+    margin: 0 auto;
 }
