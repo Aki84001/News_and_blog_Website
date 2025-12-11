@@ -91,7 +91,7 @@ def get_serper_news():
     after_date = (datetime.now() - timedelta(days=3)).strftime("%Y-%m-%d")
 
     # クエリ文字列を組み立てる
-    query = f"(科学 OR 監督 インタビュー OR 歴史 OR 地学 OR 鉱物 OR 小説 SF OR 特別展) after:{after_date}"
+    query = f"(企画展 OR 特別展) after:{after_date}"
 
     payload = {"q": query, "num": 20}  # num=取得件数
 
@@ -121,7 +121,7 @@ def get_brave_news():
     }
 
     params = {
-        "q": "アニメ インタビュー" ,
+        "q": "アニメ インタビュー SF" ,
         "count": 10,
         "country": "jp",
         "freshness": "3d"
