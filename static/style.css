@@ -50,3 +50,9 @@ body {
     margin: 0 auto;
     padding: 20px;
 }
+
+.site-logo {
+    max-width: 200px;   /* ここで上限指定 */
+    width: 50%;
+    height: auto;
+}
