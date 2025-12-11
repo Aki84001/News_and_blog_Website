@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, abort
+from flask import Flask, render_template, request, redirect
 import requests
 import feedparser
 import json, os
@@ -25,6 +25,7 @@ BRAVE_NEWS_URL = os.getenv("BRAVE_NEWS_URL")
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
 S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")
 S3_BLOG_FILE = "blog_posts.json"
+S3_REGION = "ap-northeast-1"
 
 
 
@@ -43,8 +44,11 @@ def normalize_brave(item):
          "source": item.get("meta_url", {}).get("hostname", "Brave"),
     }
 
+#S3の画像置き場URL取得
+def s3_image(filename):
+    return f"https://{S3_BUCKET_NAME}.s3.{S3_REGION}.amazonaws.com/{filename}"
 
-
+app.jinja_env.globals["s3"] = s3_image
 
 
 def save_blog_post(post):
