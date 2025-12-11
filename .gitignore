@@ -4,3 +4,4 @@ venv/
 __pycache__/ 
 *.pyc
 static/images/
+/blog_posts.json
