@@ -97,7 +97,7 @@ def get_serper_news():
         data = response.json()
         items = data.get("news", data.get("organic", []))
 
-        # MSN排除しつつ normalize する
+        # MSN経由での重複記事表示を避けつつ normalize する
         normalized = [
             normalize_serper(item)
             for item in items
