@@ -169,15 +169,11 @@ RSS_SITES = {
         "limit": 10
     },
     "Nature Asia": {
-        "url": "https://www.natureasia.com/ja-jp/rss",
+        "url": "https://www.natureasia.com/ja-jp/rss/nature",
         "description": "Nature の日本語圏向けニュースと研究紹介。",
         "limit": 10
     },
-    "Science Portal": {
-        "url": "https://scienceportal.jst.go.jp/feed/rss.xml",
-        "description": "科学技術振興機構による科学ニュース全般。",
-        "limit": 10
-    },
+
     "JSTAGE": {
         "url": "https://www.jstage.jst.go.jp/AF02S010Download?cdRss=003&rssLang=ja",
         "description": "JSTAGEで直近に公開された学会誌の一覧です。当日分だけ出してますがあまりに数が多いので気が向いたやつだけ見てください・・・。",
