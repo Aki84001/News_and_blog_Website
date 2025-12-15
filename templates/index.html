@@ -30,20 +30,23 @@
         {% endfor %}
     </div>
 
-    <div class="column">  
-        <h2>おすすめ科学系サイト</h2>
 
-        {% for site in rss %}
-        <h2>{{ site.site_name }}</h3>
+        <h2>おすすめ科学系サイト</h2>
+    
+    {% for site in rss %}
+    <div class="rss-site">  
+        <h3>{{ site.site_name }}</h3>
         <p>{{ site.description }}</p>
 
         <ul>
             {% for article in site.articles %}
-            <li><a href="{{ article.link }}">{{ article.title }}</a></li>
+            <li>
+                <a href="{{ article.link }}">{{ article.title }}</a>
+            </li>
             {% endfor %}
         </ul>
-        {% endfor %}
     </div>
+     {% endfor %}
 
 
     <div class="column">

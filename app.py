@@ -86,7 +86,7 @@ def get_serper_news():
         "Content-Type": "application/json"
     }
 
-    # 今日から3日前の日付を生成
+    # 3日以上経った記事は表示させないようにする。
     after_date = (datetime.now() - timedelta(days=3)).strftime("%Y-%m-%d")
 
     # クエリ文字列を組み立てる
