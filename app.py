@@ -4,7 +4,6 @@ import feedparser
 import json, os
 import markdown
 from datetime import datetime, timedelta
-from urllib.parse import urlparse
 import boto3
 from dotenv import load_dotenv
 load_dotenv()
@@ -163,54 +162,72 @@ def delduplicate_articles(articles):
 
 
 # ====== RSSの設定 ======
-RSS_FEEDS = [
-    "https://nazology.kusuguru.co.jp/feed",#ナゾロジー
-    "https://www.jstage.jst.go.jp/AF02S010Download?cdRss=003&rssLang=ja" #JSTAGE
-]
+RSS_SITES = {
+    "ナゾロジー": {
+        "url": "https://nazology.kusuguru.co.jp/feed",
+        "description": "科学ニュースや不思議なトピックを分かりやすく紹介するライトな科学メディアです！  一番良く見てます",
+        "limit": 5
+    },
+    "JSTAGE": {
+        "url": "https://www.jstage.jst.go.jp/AF02S010Download?cdRss=003&rssLang=ja",
+        "description": "JSTAGEで直近に公開された学会誌の一覧です。当日分だけ出してますがあまりに数が多いので気が向いたやつだけ見てください・・・。",
+        "limit": 20
+    }
+}
 
- 
 def get_rss_articles():
-    articles = []
-    for feed_url in RSS_FEEDS:
-        feed = feedparser.parse(feed_url)
-        feed_title = getattr(feed.feed, "title", "RSS")
+    results = []
+
+    for site_name, info in RSS_SITES.items():
+        feed = feedparser.parse(info["url"])
+        site_articles = []
+
         for entry in feed.entries:
-            # Atom形式はリンクが dict になってる場合がある
-            link = entry.get("link", None)
+            # link の形式対策
+            link = entry.get("link")
             if isinstance(link, list):
                 link = link[0].get("href", "#")
 
-            # JSTAGEのRSSの場合は処理を分岐。形式にバラツキがあり、また数も多いため
-            if "jstage.jst.go.jp" in feed_url:
-                # タイトルは <author><name> から取得 
-                author_name = entry.get("author", None)
-                if not author_name:
-                    # authorタグが無ければ無題
-                    title = "無題"
-                else:
-                    title = author_name
+            # ===== JSTAGE 専用処理 =====
+            if "jstage.jst.go.jp" in info["url"]:
+                title = entry.get("author", "無題")
 
-                # published が存在する場合のみ日付チェック
                 published_str = getattr(entry, "published", "")
-                if published_str:
-                    published_date = datetime.strptime(published_str[:10], "%Y-%m-%d")
-                    if datetime.now() - published_date > timedelta(days=1):
-                        continue  # 当日以外の記事はスキップ
-                else:
-                    published_date = None
-            else:
-                # Nazologyなどは従来通り
-                title = getattr(entry, "title", "無題")
-                published_date = getattr(entry, "published", "")
+                if not published_str:
+                    continue
 
-            articles.append({
+                try:
+                    published_date = datetime.strptime(
+                        published_str[:10], "%Y-%m-%d"
+                    )
+                except ValueError:
+                    continue
+
+                if datetime.now() - published_date > timedelta(days=1):
+                    continue
+
+            # ===== 通常RSS =====
+            else:
+                title = getattr(entry, "title", "無題")
+
+            site_articles.append({
                 "title": title,
-                "link": link or "#",
-                "source": feed_title,
-                "published": published_date
+                "link": link or "#"
             })
 
-    return articles
+            if len(site_articles) >= info["limit"]:
+                break
+
+        results.append({
+            "site_name": site_name,
+            "description": info["description"],
+            "articles": site_articles
+        })
+
+    return results
+
+ 
+
 
 
 

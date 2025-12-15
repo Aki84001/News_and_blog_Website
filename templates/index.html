@@ -30,17 +30,18 @@
         {% endfor %}
     </div>
 
-    <div class="column">
-        <h2>おすすめ学術系ニュース</h2>
-        {% for a in rss %}
-            <div class="card">
-                <a href="{{ a.link }}" target="_blank">{{ a.title }}</a>
-          {% if a.source %}
-              <p class="source">出典：{{ a.source }}</p>
-          {% endif %}
-            </div>
-        {% endfor %}
-    </div>
+<h2>おすすめ科学系サイト</h2>
+
+{% for site in rss %}
+  <h2>{{ site.site_name }}</h2>
+  <p>{{ site.description }}</p>
+
+  <ul>
+    {% for article in site.articles %}
+      <li><a href="{{ article.link }}">{{ article.title }}</a></li>
+    {% endfor %}
+  </ul>
+{% endfor %}
 
 <div class="column">
     <h2>ブログ</h2>
