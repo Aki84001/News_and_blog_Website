@@ -30,33 +30,36 @@
         {% endfor %}
     </div>
 
-<h2>おすすめ科学系サイト</h2>
+    <div class="column"></div>   
+        <h2>おすすめ科学系サイト</h2>
 
-{% for site in rss %}
-  <h2>{{ site.site_name }}</h2>
-  <p>{{ site.description }}</p>
+        {% for site in rss %}
+        <h2>{{ site.site_name }}</h2>
+        <p>{{ site.description }}</p>
 
-  <ul>
-    {% for article in site.articles %}
-      <li><a href="{{ article.link }}">{{ article.title }}</a></li>
-    {% endfor %}
-  </ul>
-{% endfor %}
-
-<div class="column">
-    <h2>ブログ</h2>
-    {% for p in blog %}
-    <div class="card">
-        <a href="/post/{{ p.id }}">
-            {% if p.thumbnail %}
-                <img src="{{ p.thumbnail }}" style="width: 150px;">
-            {% endif %}
-            <p>{{ p.title }}</p>
-        </a>
+        <ul>
+            {% for article in site.articles %}
+            <li><a href="{{ article.link }}">{{ article.title }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
     </div>
-    {% endfor %}
 
-</div>
+
+    <div class="column">
+        <h2>ブログ</h2>
+        {% for p in blog %}
+        <div class="card">
+            <a href="/post/{{ p.id }}">
+                {% if p.thumbnail %}
+                    <img src="{{ p.thumbnail }}" style="width: 150px;">
+                {% endif %}
+                <p>{{ p.title }}</p>
+            </a>
+        </div>
+        {% endfor %}
+
+    </div>
 </div>
 </body>
 </html>
