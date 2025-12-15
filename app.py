@@ -166,7 +166,15 @@ RSS_SITES = {
     "ナゾロジー": {
         "url": "https://nazology.kusuguru.co.jp/feed",
         "description": "科学ニュースや不思議なトピックを分かりやすく紹介するライトな科学メディアです！  一番良く見てます",
-        "limit": 5
+        "limit": 10
+    },
+    "Nature Asia": {
+        "url": "https://www.natureasia.com/ja-jp/rss",
+        "description": "Nature の日本語圏向けニュースと研究紹介。",
+    },
+    "Science Portal": {
+        "url": "https://scienceportal.jst.go.jp/feed/rss.xml",
+        "description": "科学技術振興機構による科学ニュース全般。",
     },
     "JSTAGE": {
         "url": "https://www.jstage.jst.go.jp/AF02S010Download?cdRss=003&rssLang=ja",
