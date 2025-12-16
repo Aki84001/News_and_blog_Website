@@ -4,8 +4,9 @@ body {
   margin: 20px;
 }
 .columns {
-  display: flex;
-  gap: 20px;
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
 }
 .column {
   flex: 1;
