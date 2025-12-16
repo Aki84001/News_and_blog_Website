@@ -97,16 +97,21 @@ body {
     margin: 0.5em 0;
 }
 
-.rss-list li {
+.news-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.news-list li {
     margin: 0.3em 0;
 }
 
-.rss-list a {
+.news-list a {
     text-decoration: none;
     color: #333;
 }
 
-.rss-list a:hover {
+.news-list a:hover {
     text-decoration: underline;
 }
 
