@@ -108,3 +108,14 @@ body {
 .rss-list a:hover {
     text-decoration: underline;
 }
+
+.rss-more summary {
+    cursor: pointer;
+    font-size: 0.9em;
+    color: #4a6fa5;
+    margin-top: 0.3em;
+}
+
+.rss-more summary:hover {
+    text-decoration: underline;
+}
