@@ -188,15 +188,22 @@ def get_rss_articles():
         feed = feedparser.parse(info["url"])
         site_articles = []
 
+        # JSTAGE用の重複排除セット
+        seen_titles = set()
+
         for entry in feed.entries:
-            # link の形式対策
             link = entry.get("link")
             if isinstance(link, list):
                 link = link[0].get("href", "#")
 
-            # ===== JSTAGE 専用処理 =====  
+            # ===== JSTAGE =====
             if "jstage.jst.go.jp" in info["url"]:
                 title = entry.get("author", "無題")
+
+                # 重複排除（ここが肝）
+                if title in seen_titles:
+                    continue
+                seen_titles.add(title)
 
                 published_str = getattr(entry, "published", "")
                 if not published_str:
@@ -232,28 +239,6 @@ def get_rss_articles():
 
     return results
 
-def filter_jstage_articles(articles):
-    seen = set()
-    filtered = []
-
-    for a in articles:
-        # JSTAGEだけ対象
-        if a["source"] != "J-STAGE":
-            filtered.append(a)
-            continue
-
-        key = (
-            a.get("title"),          # 実質 学会名
-            str(a.get("published"))  # 日付
-        )
-
-        if key in seen:
-            continue
-
-        seen.add(key)
-        filtered.append(a)
-
-    return filtered
 
 
 # ====== Flaskルート ======
@@ -262,7 +247,6 @@ def index():
     serper_news = get_serper_news()
     brave_news = get_brave_news()
     rss_articles = get_rss_articles()
-    rss_articles = filter_jstage_articles(rss_articles)
     blog_posts = load_blog_posts()
     posts_sorted = sorted(blog_posts, key=lambda x: x["id"], reverse=True)    
     all_news = delduplicate_articles(serper_news + brave_news)
