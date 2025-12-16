@@ -171,7 +171,7 @@ RSS_SITES = {
     "Nature Asia": {
         "url": "https://www.natureasia.com/ja-jp/rss/nature",
         "description": "Nature の日本語圏向けニュースと研究紹介のハイライトです。",
-        "limit": 10
+        "limit": 100
     },
 
     "JSTAGE": {
@@ -194,7 +194,7 @@ def get_rss_articles():
             if isinstance(link, list):
                 link = link[0].get("href", "#")
 
-            # ===== JSTAGE 専用処理 =====
+            # ===== JSTAGE 専用処理 =====  
             if "jstage.jst.go.jp" in info["url"]:
                 title = entry.get("author", "無題")
 
@@ -232,10 +232,28 @@ def get_rss_articles():
 
     return results
 
- 
+def filter_jstage_articles(articles):
+    seen = set()
+    filtered = []
 
+    for a in articles:
+        # JSTAGEだけ対象
+        if a["source"] != "J-STAGE":
+            filtered.append(a)
+            continue
 
+        key = (
+            a.get("title"),          # 実質 学会名
+            str(a.get("published"))  # 日付
+        )
 
+        if key in seen:
+            continue
+
+        seen.add(key)
+        filtered.append(a)
+
+    return filtered
 
 
 # ====== Flaskルート ======
@@ -244,6 +262,7 @@ def index():
     serper_news = get_serper_news()
     brave_news = get_brave_news()
     rss_articles = get_rss_articles()
+    rss_articles = filter_jstage_articles(rss_articles)
     blog_posts = load_blog_posts()
     posts_sorted = sorted(blog_posts, key=lambda x: x["id"], reverse=True)    
     all_news = delduplicate_articles(serper_news + brave_news)
