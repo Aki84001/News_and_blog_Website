@@ -52,31 +52,18 @@
         </ul>
     </div>
 
+    <div class="column">
+        <div class="column rss-column">
+            <h2>おすすめ学術系サイト</h2>
+            <h3>学術系情報が纏められているサイトを集めてます。</h3>
 
-    <div class="column rss-column">
-        <h2>おすすめ学術系サイト</h2>
-        <h3>学術系情報が纏められているサイトを集めてます。</h3>
+            {% for site in rss %}
+            <div class="rss-site">
+                <h3 class="rss-site-title">{{ site.site_name }}</h3>
+                <p class="rss-description">{{ site.description }}</p>
 
-        {% for site in rss %}
-        <div class="rss-site">
-            <h3 class="rss-site-title">{{ site.site_name }}</h3>
-            <p class="rss-description">{{ site.description }}</p>
-
-            <ul class="rss-list">
-                {% for article in site.articles[:3] %}
-                <li>
-                    <a href="{{ article.link }}" target="_blank" rel="noopener">
-                        {{ article.title }}
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-
-            {% if site.articles|length > 3 %}
-            <details class="rss-more">
-                <summary>他 {{ site.articles|length - 3 }} 件を見る</summary>
                 <ul class="rss-list">
-                    {% for article in site.articles[3:] %}
+                    {% for article in site.articles[:3] %}
                     <li>
                         <a href="{{ article.link }}" target="_blank" rel="noopener">
                             {{ article.title }}
@@ -84,12 +71,25 @@
                     </li>
                     {% endfor %}
                 </ul>
-            </details>
-            {% endif %}
-        </div>
-        {% endfor %}
-    </div>
 
+                {% if site.articles|length > 3 %}
+                <details class="rss-more">
+                    <summary>他 {{ site.articles|length - 3 }} 件を見る</summary>
+                    <ul class="rss-list">
+                        {% for article in site.articles[3:] %}
+                        <li>
+                            <a href="{{ article.link }}" target="_blank" rel="noopener">
+                                {{ article.title }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </details>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 
 
     <div class="column">
