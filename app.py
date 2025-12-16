@@ -176,7 +176,7 @@ RSS_SITES = {
 
     "JSTAGE": {
         "url": "https://www.jstage.jst.go.jp/AF02S010Download?cdRss=003&rssLang=ja",
-        "description": "JSTAGEで直近に公開された学会誌の一覧です。当日分だけ出してますがあまりに数が多いので気が向いたやつだけ見てください・・・。",
+        "description": "JSTAGEで直近学会誌を出した団体の一覧です。当日分だけ出してますがが多いので気が向いたやつだけ見てください・・・。",
         "limit": 100
     }
 }
@@ -244,15 +244,15 @@ def get_rss_articles():
 # ====== Flaskルート ======
 @app.route("/")
 def index():
-    serper_news = get_serper_news()
-    brave_news = get_brave_news()
+    academic_news = get_serper_news()
+    subculture_news = get_brave_news()
     rss_articles = get_rss_articles()
     blog_posts = load_blog_posts()
     posts_sorted = sorted(blog_posts, key=lambda x: x["id"], reverse=True)    
-    all_news = delduplicate_articles(serper_news + brave_news)
     return render_template(
         "index.html",
-        news=all_news,
+        academic_news = academic_news,
+        subculture_news = subculture_news,
         rss=rss_articles,
         blog=posts_sorted
     )
