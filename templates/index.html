@@ -17,69 +17,53 @@
 博物館、美術館の特別展の企画情報だったり、アニメのインタビュー記事だったり、学術系のニュースだったり、管理人が気になる情報を収集して纏めているサイトです。ついでに面白かった本のレビューなども載せてます。趣味の合う人が気に入ってくれるサイトになるように日々改修中です。
 </h2>
 
+<div class = "columns"> 
+    <div class="column">
+        <h2>学術・研究・展示ニュース</h2>
+        <p class="section-desc">
+            博物館・美術館・研究機関による企画展・特別展の情報
+        </p>
 
-<div class="column">
-    <h2>学術・研究・展示ニュース</h2>
-    <p class="section-desc">
-        博物館・美術館・研究機関による企画展・特別展の情報
-    </p>
-
-    <ul class="news-list">
-        {% for article in academic_news %}
-        <li>
-            <a href="{{ article.link }}" target="_blank" rel="noopener">
-                {{ article.title }}
-            </a>
-            <span class="news-source">{{ article.source }}</span>
-        </li>
-        {% endfor %}
-    </ul>
-
-    <h2>サブカル・SF・インタビュー</h2>
-    <p class="section-desc">
-        アニメ・SF・作家やクリエイターのインタビューなど
-    </p>
-
-    <ul class="news-list">
-        {% for article in subculture_news %}
-        <li>
-            <a href="{{ article.link }}" target="_blank" rel="noopener">
-                {{ article.title }}
-            </a>
-            <span class="news-source">{{ article.source }}</span>
-        </li>
-        {% endfor %}
-    </ul>
-</div>
-
-
-
-
-    
-<div class="column rss-column">
-    <h2>おすすめ学術系サイト</h2>
-    <h3>学術系情報が纏められているサイトを集めてます。</h3>
-
-    {% for site in rss %}
-    <div class="rss-site">
-        <h3 class="rss-site-title">{{ site.site_name }}</h3>
-        <p class="rss-description">{{ site.description }}</p>
-
-        <ul class="rss-list">
-            {% for article in site.articles[:3] %}
+        <ul class="news-list">
+            {% for article in academic_news %}
             <li>
                 <a href="{{ article.link }}" target="_blank" rel="noopener">
                     {{ article.title }}
                 </a>
+                <span class="news-source">{{ article.source }}</span>
             </li>
             {% endfor %}
         </ul>
 
-        {% if site.articles|length > 3 %}
-        <details class="rss-more">
-            <summary>他 {{ site.articles|length - 3 }} 件を見る</summary>
+        <h2>サブカル・SF・インタビュー</h2>
+        <p class="section-desc">
+            アニメ・SF・作家やクリエイターのインタビューなど
+        </p>
+
+        <ul class="news-list">
+            {% for article in subculture_news %}
+            <li>
+                <a href="{{ article.link }}" target="_blank" rel="noopener">
+                    {{ article.title }}
+                </a>
+                <span class="news-source">{{ article.source }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+
+    <div class="column rss-column">
+        <h2>おすすめ学術系サイト</h2>
+        <h3>学術系情報が纏められているサイトを集めてます。</h3>
+
+        {% for site in rss %}
+        <div class="rss-site">
+            <h3 class="rss-site-title">{{ site.site_name }}</h3>
+            <p class="rss-description">{{ site.description }}</p>
+
             <ul class="rss-list">
-                {% for article in site.articles[3:] %}
+                {% for article in site.articles[:3] %}
                 <li>
                     <a href="{{ article.link }}" target="_blank" rel="noopener">
                         {{ article.title }}
@@ -87,11 +71,24 @@
                 </li>
                 {% endfor %}
             </ul>
-        </details>
-        {% endif %}
+
+            {% if site.articles|length > 3 %}
+            <details class="rss-more">
+                <summary>他 {{ site.articles|length - 3 }} 件を見る</summary>
+                <ul class="rss-list">
+                    {% for article in site.articles[3:] %}
+                    <li>
+                        <a href="{{ article.link }}" target="_blank" rel="noopener">
+                            {{ article.title }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </details>
+            {% endif %}
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
 
 
 
@@ -110,5 +107,7 @@
 
     </div>
 </div>
+
+
 </body>
 </html>
