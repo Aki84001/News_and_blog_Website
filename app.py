@@ -216,7 +216,7 @@ def get_rss_articles():
                 except ValueError:
                     continue
 
-                if datetime.now() - published_date > timedelta(days=1):
+                if datetime.now() - published_date > timedelta(days=2):
                     continue
 
             # ===== 通常RSS =====
