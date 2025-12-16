@@ -33,20 +33,16 @@
 
 
     
-    <div class="column rss-column">  
-        <h2>おすすめ学術系サイト</h2>
-        {% for site in rss %}
-        <details class="rss-site">
-            <summary class="rss-site-title">
-                {{ site.site_name }}
-            </summary>
+<div class="column rss-column">
+    <h2>おすすめ学術系サイト</h2>
 
-        <p class="rss-description">
-            {{ site.description }}
-        </p>
+    {% for site in rss %}
+    <div class="rss-site">
+        <h3 class="rss-site-title">{{ site.site_name }}</h3>
+        <p class="rss-description">{{ site.description }}</p>
 
         <ul class="rss-list">
-            {% for article in site.articles %}
+            {% for article in site.articles[:3] %}
             <li>
                 <a href="{{ article.link }}" target="_blank" rel="noopener">
                     {{ article.title }}
@@ -54,9 +50,24 @@
             </li>
             {% endfor %}
         </ul>
+
+        {% if site.articles|length > 3 %}
+        <details class="rss-more">
+            <summary>他 {{ site.articles|length - 3 }} 件を見る</summary>
+            <ul class="rss-list">
+                {% for article in site.articles[3:] %}
+                <li>
+                    <a href="{{ article.link }}" target="_blank" rel="noopener">
+                        {{ article.title }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
         </details>
-        {% endfor %}
+        {% endif %}
     </div>
+    {% endfor %}
+</div>
 
 
     <div class="column">
