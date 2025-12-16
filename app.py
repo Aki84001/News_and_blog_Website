@@ -170,14 +170,14 @@ RSS_SITES = {
     },
     "Nature Asia": {
         "url": "https://www.natureasia.com/ja-jp/rss/nature",
-        "description": "Nature の日本語圏向けニュースと研究紹介。",
+        "description": "Nature の日本語圏向けニュースと研究紹介のハイライトです。",
         "limit": 10
     },
 
     "JSTAGE": {
         "url": "https://www.jstage.jst.go.jp/AF02S010Download?cdRss=003&rssLang=ja",
         "description": "JSTAGEで直近に公開された学会誌の一覧です。当日分だけ出してますがあまりに数が多いので気が向いたやつだけ見てください・・・。",
-        "limit": 20
+        "limit": 30
     }
 }
 

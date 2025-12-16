@@ -33,17 +33,28 @@
 
 
     
-    <div class="column">  
-        <h2>おすすめ科学系サイト</h2>
+    <div class="column rss-column">  
+        <h2>おすすめ学術系サイト</h2>
         {% for site in rss %}
-        <h3>{{ site.site_name }}</h3>
-        <p>{{ site.description }}</p>
+        <details class="rss-site">
+            <summary class="rss-site-title">
+                {{ site.site_name }}
+            </summary>
 
-        <ul>
+        <p class="rss-description">
+            {{ site.description }}
+        </p>
+
+        <ul class="rss-list">
             {% for article in site.articles %}
-            <li><a href="{{ article.link }}">{{ article.title }}</a></li>
+            <li>
+                <a href="{{ article.link }}" target="_blank" rel="noopener">
+                    {{ article.title }}
+                </a>
+            </li>
             {% endfor %}
         </ul>
+        </details>
         {% endfor %}
     </div>
 
