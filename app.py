@@ -177,7 +177,7 @@ RSS_SITES = {
     "JSTAGE": {
         "url": "https://www.jstage.jst.go.jp/AF02S010Download?cdRss=003&rssLang=ja",
         "description": "JSTAGEで直近に公開された学会誌の一覧です。当日分だけ出してますがあまりに数が多いので気が向いたやつだけ見てください・・・。",
-        "limit": 30
+        "limit": 100
     }
 }
 
