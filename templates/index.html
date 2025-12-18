@@ -96,21 +96,23 @@
     </div>
 
     <div class="column rss-column">
-    <h2>ブログ</h2>
-    <h3>管理人の書いたレビューや雑記</h3>
+    <h2>ブログ記事</h2>
+    <h3>管理人が読んだ本のレビューなどを載せてます。</h3>
 
         <div class="colum-block">
             <ul class="news-list blog-list">
             {% for p in blog[:5] %}
-            <li class="blog-item">
-                {% if p.thumbnail %}
-                <img src="{{ p.thumbnail }}" class="blog-thumb">
-                {% endif %}
-                <a href="/post/{{ p.id }}">
-                {{ p.title }}
-                </a>
-            </li>
-            {% endfor %}
+                <li class="blog-item">
+                    {% if p.thumbnail %}
+                    <a href="/post/{{ p.id }}">
+                        <img src="{{ p.thumbnail }}" class="blog-thumb-large">
+                    </a>
+                    {% endif %}
+                    <a href="/post/{{ p.id }}" class="blog-title">
+                    {{ p.title }}
+                    </a>
+                </li>
+                {% endfor %}
             </ul>
         </div>
     </div>

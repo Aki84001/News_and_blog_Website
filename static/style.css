@@ -152,16 +152,21 @@ body {
     text-decoration: underline;
 }
 
-.blog-list .blog-item {
-  display: flex;
-  gap: 10px;
-  align-items: center;
+.blog-item {
+  margin-bottom: 1.2em;
 }
 
-.blog-thumb {
-  width: 60px;
-  height: 60px;
+.blog-thumb-large {
+  width: 100%;
+  max-height: 160px;
   object-fit: cover;
-  border-radius: 4px;
-  flex-shrink: 0;
+  border-radius: 6px;
+  display: block;
+  margin-bottom: 0.4em;
+}
+
+.blog-title {
+  display: block;
+  font-size: 1em;
+  line-height: 1.5;
 }
