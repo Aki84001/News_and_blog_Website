@@ -32,6 +32,7 @@ body {
     display: block;
     margin: 0 auto 10px;
     border-radius: 6px;
+    text-align: left;
 }
 .article-content img {
     max-width: 100%;
@@ -138,9 +139,6 @@ body {
 .rss-list a:hover {
     text-decoration: underline;
 }
-
-
-
 
 
 .rss-more summary {
