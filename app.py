@@ -26,6 +26,10 @@ S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")
 S3_BLOG_FILE = "blog_posts.json"
 S3_REGION = "ap-northeast-1"
 
+NEWS_CACHE = {
+    "data": None,
+    "updated": None
+}
 
 
 # ====== APIの取得結果フォーマットの統合 ======
@@ -157,7 +161,19 @@ def delduplicate_articles(articles):
             unique_articles.append(a)
     return unique_articles
 
+def get_cached_news():
+    if NEWS_CACHE["updated"] and datetime.now() - NEWS_CACHE["updated"] < timedelta(minutes=30):
+        return NEWS_CACHE["data"]
 
+    data = {
+        "academic": get_serper_news(),
+        "subculture": get_brave_news(),
+        "rss": get_rss_articles()
+    }
+
+    NEWS_CACHE["data"] = data
+    NEWS_CACHE["updated"] = datetime.now()
+    return data
 
 
 
@@ -176,7 +192,7 @@ RSS_SITES = {
 
     "JSTAGE": {
         "url": "https://www.jstage.jst.go.jp/AF02S010Download?cdRss=003&rssLang=ja",
-        "description": "JSTAGEで直近学会誌を出した団体の一覧です。当日分だけ出してますが数が多いので気が向いたやつだけ見てください・・・。",
+        "description": "JSTAGEという日本の論文が集められたサイトで直近学会誌を出した団体の一覧です。ものによってはフリーじゃなかったりするんで見れないやつもあるかもです・・・。",
         "limit": 100
     }
 }
@@ -244,21 +260,23 @@ def get_rss_articles():
 # ====== Flaskルート ======
 @app.route("/")
 def index():
-    academic_news = get_serper_news()
-    subculture_news = get_brave_news()
+    news = get_cached_news()
     rss_articles = get_rss_articles()
     blog_posts = load_blog_posts()
     posts_sorted = sorted(blog_posts, key=lambda x: x["id"], reverse=True)    
     return render_template(
         "index.html",
-        academic_news = academic_news,
-        subculture_news = subculture_news,
+        academic_news=news["academic"],
+        ubculture_news=news["subculture"],
         rss=rss_articles,
         blog=posts_sorted
     )
 
 @app.route("/new", methods=["GET", "POST"])
 def new_post():
+    if request.form.get("password") != ADMIN_PASSWORD:
+        return "Forbidden", 403
+
     if request.method == "POST":
         posts = load_blog_posts()
         next_id = (max([p["id"] for p in posts]) + 1) if posts else 1
@@ -292,6 +310,60 @@ def show_post(post_id):
     )
 
     return render_template("post.html", post=target, html_content=html_body)
+
+@app.route("/edit/<int:post_id>", methods=["GET", "POST"])
+def edit_post(post_id):
+    posts = load_blog_posts()
+    post = next((p for p in posts if p["id"] == post_id), None)
+    if not post:
+        return "Not Found", 404
+
+    if request.method == "POST":
+        if request.form["password"] != ADMIN_PASSWORD:
+            return "Forbidden", 403
+
+        post["title"] = request.form["title"]
+        post["content"] = request.form["content"]
+
+        s3.put_object(
+            Bucket=S3_BUCKET_NAME,
+            Key=S3_BLOG_FILE,
+            Body=json.dumps(posts, ensure_ascii=False, indent=2).encode("utf-8"),
+            ContentType="application/json"
+        )
+        return redirect(f"/post/{post_id}")
+
+    return render_template("edit_post.html", post=post)
+
+
+
+
+@app.route("/delete/<int:post_id>", methods=["POST"])
+def delete_post(post_id):
+    if request.form.get("password") != ADMIN_PASSWORD:
+        return "Forbidden", 403
+
+    posts = load_blog_posts()
+    posts = [p for p in posts if p["id"] != post_id]
+
+    reflect_changeresult_of_blog_posts(posts)
+    return redirect("/")
+
+
+def reflect_changeresult_of_blog_posts(posts):
+    s3.put_object(
+        Bucket=S3_BUCKET_NAME,
+        Key=S3_BLOG_FILE,
+        Body=json.dumps(posts, ensure_ascii=False, indent=2).encode("utf-8"),
+        ContentType="application/json"
+    )
+
+
+
+
+
+
+
 
 
 if __name__ == "__main__":

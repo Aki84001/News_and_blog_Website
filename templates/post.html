@@ -1,37 +1,21 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ post.title }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% extends "base.html" %}
 
-<header class="site-header">
-    <a href="/">
-        <img src="{{ s3('images/birdsong_title.png') }}" alt="My News Hub">
-    </a>
-</header>
+{% block title %}{{ post.title }}{% endblock %}
 
+{% block content %}
 <div class="post-wrapper">
+  <h1>{{ post.title }}</h1>
 
-    <h1>{{ post.title }}</h1>
+  {% if post.thumbnail %}
+    <img src="{{ post.thumbnail }}" class="thumbnail">
+  {% endif %}
 
-    {% if post.thumbnail %}
-        <img src="{{ post.thumbnail }}" alt="サムネイル" class="thumbnail">
-    {% endif %}
+  {% if post.tags %}
+    <p class="tags">{{ post.tags | join(', ') }}</p>
+  {% endif %}
 
-    {% if post.tags %}
-        <p class="tags">タグ: {{ post.tags | join(', ') }}</p>
-    {% endif %}
-
-    <div class="article-content">
-        {{ html_content|safe }}
-    </div>
-
+  <div class="article-content">
+    {{ html_content | safe }}
+  </div>
 </div>
-
-<p><a href="/">戻る</a></p>
-
-</body>
-</html>
+{% endblock %}

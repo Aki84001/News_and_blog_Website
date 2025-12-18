@@ -52,6 +52,12 @@ body {
     padding: 20px;
 }
 
+.post-page .site-logo img {
+    width: 500px;
+    margin-bottom: 20px;
+}
+
+
 .site-logo {
     margin: 0;
     padding: 0;
