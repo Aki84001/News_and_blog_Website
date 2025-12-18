@@ -151,3 +151,17 @@ body {
 .rss-more summary:hover {
     text-decoration: underline;
 }
+
+.blog-list .blog-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.blog-thumb {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}

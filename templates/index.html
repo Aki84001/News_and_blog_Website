@@ -95,39 +95,24 @@
         {% endfor %}
     </div>
 
-    <div class="colum-block">
-        <h3 class="colum-block-title">最新記事</h3>
-        <p class="colum-block-description">
-        ニュースとは別に、気になったことをまとめています
-        </p>
+    <div class="column rss-column">
+    <h2>ブログ</h2>
+    <h3>管理人の書いたレビューや雑記</h3>
 
-        <ul class="news-list">
+        <div class="colum-block">
+            <ul class="news-list blog-list">
             {% for p in blog[:5] %}
-            <li>
+            <li class="blog-item">
+                {% if p.thumbnail %}
+                <img src="{{ p.thumbnail }}" class="blog-thumb">
+                {% endif %}
                 <a href="/post/{{ p.id }}">
                 {{ p.title }}
                 </a>
             </li>
-        {% endfor %}
-        </ul>
-
-        {% if blog|length > 5 %}
-        <details class="rss-more">
-        <summary>他 {{ blog|length - 5 }} 件を見る</summary>
-        <ul class="news-list">
-            {% for p in blog[5:] %}
-            <li>
-                <a href="/post/{{ p.id }}">
-                    {{ p.title }}
-                {% if p.thumbnail %}
-                    <img src="{{ p.thumbnail }}" style="width: 150px;">
-                {% endif %}
-                </a>
-            </li>
             {% endfor %}
-        </ul>
-        </details>
-        {% endif %}
+            </ul>
+        </div>
     </div>
 </div>
 
