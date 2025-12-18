@@ -267,7 +267,7 @@ def index():
     return render_template(
         "index.html",
         academic_news=news["academic"],
-        ubculture_news=news["subculture"],
+        subculture_news=news["subculture"],
         rss=rss_articles,
         blog=posts_sorted
     )
@@ -293,7 +293,7 @@ def new_post():
 
         save_blog_post(post)
         return redirect(f"/post/{next_id}")
-    return render_template("new_post.html")
+    return render_template("post_form.html")
 
 
 @app.route("/post/<int:post_id>")
@@ -333,9 +333,7 @@ def edit_post(post_id):
         )
         return redirect(f"/post/{post_id}")
 
-    return render_template("edit_post.html", post=post)
-
-
+    return render_template("post_form.html", post=post)
 
 
 @app.route("/delete/<int:post_id>", methods=["POST"])
@@ -357,12 +355,6 @@ def reflect_changeresult_of_blog_posts(posts):
         Body=json.dumps(posts, ensure_ascii=False, indent=2).encode("utf-8"),
         ContentType="application/json"
     )
-
-
-
-
-
-
 
 
 
