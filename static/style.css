@@ -62,12 +62,13 @@ body {
   font-size: 1.2em;
   color: #34495e;
 
+  
 .article-content blockquote {
   margin: 1.5em 0;
   padding: 0.8em 1em;
   background: #f2f4f7;
   border-left: 4px solid #999;
-  color: #555;
+  color: #1111cff7;
   font-style: italic;
 }
 
