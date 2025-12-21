@@ -5,7 +5,7 @@
   <title>{% block title %}My News Hub{% endblock %}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
+<body class="{% block body_class %}{% endblock %}">
 
 <header class="site-header">
   <a href="/">

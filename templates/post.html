@@ -1,8 +1,12 @@
 {% extends "base.html" %}
+{% block body_class %}post-page{% endblock %}
+
 
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
+<a href="/" class="back-link">← 戻る</a>
+
 <div class="post-wrapper">
   <h1>{{ post.title }}</h1>
 
