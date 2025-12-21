@@ -47,6 +47,34 @@ body {
     white-space: normal;
 }
 
+.article-content h2 {
+  margin-top: 2.5em;
+  margin-bottom: 0.8em;
+  padding-left: 0.5em;
+  border-left: 5px solid #4a6fa5;
+  font-size: 1.4em;
+  color: #2c3e50;
+}
+
+.article-content h3 {
+  margin-top: 2em;
+  margin-bottom: 0.6em;
+  font-size: 1.2em;
+  color: #34495e;
+
+.article-content blockquote {
+  margin: 1.5em 0;
+  padding: 0.8em 1em;
+  background: #f2f4f7;
+  border-left: 4px solid #999;
+  color: #555;
+  font-style: italic;
+}
+
+.article-content p {
+  margin: 1em 0;
+}
+
 .post-wrapper {
     max-width: 800px;
     margin: 0 auto;
