@@ -61,7 +61,7 @@ body {
   margin-bottom: 0.6em;
   font-size: 1.2em;
   color: #34495e;
-
+}
   
 .article-content blockquote {
   margin: 1.5em 0;
@@ -70,6 +70,11 @@ body {
   border-left: 4px solid #999;
   color: #1111cff7;
   font-style: italic;
+}
+
+.article-content blockquote p {
+  margin: 0;
+  color: #1111cff7;
 }
 
 .article-content p {
@@ -201,4 +206,4 @@ body {
 .post-page .site-header img {
   display: none;
 }
-}
+
