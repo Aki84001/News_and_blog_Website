@@ -219,9 +219,7 @@ h1 {
 }
 
 .blog-item {
-  display: flex;
   gap: 0.6em;
-  align-items: flex-start;
 }
 
 .blog-thumbnail {
