@@ -152,6 +152,7 @@ h1 {
     font-weight: bold;
     cursor: pointer;
     color: #4a6fa5;
+    margin-top: 0px;
 }
 
 .colum-block-title:hover {
@@ -223,7 +224,7 @@ h1 {
 }
 
 .blog-thumbnail {
-  max-height: 100px;
+  max-height: 200px;
   display: block;
   margin: 0 0 0.4em;
 }
