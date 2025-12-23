@@ -16,18 +16,20 @@
 </head>
 <body>
 
-<div class="site-logo">
+<p class="site-description">
     <img src="{{ s3('images/birdsong_title.png') }}" alt="My News Hub">
-</div>
+</p>
 
-<h2>
-博物館、美術館の特別展の企画情報だったり、アニメのインタビュー記事だったり、学術系のニュースだったり、管理人が気になる情報を収集して纏めているサイトです。ついでに面白かった本のレビューなども載せてます。趣味の合う人が気に入ってくれるサイトになるように日々改修中です。
-</h2>
+<div class="site-discription">
+博物館、美術館の特別展の企画情報だったり、サブカル系のインタビュー記事だったり、学術系の研究に関するニュースだったり、管理人が気になる情報を収集して纏めているサイトです。ついでに面白かった本のレビューなども載せてます。趣味の合う人が気に入ってくれるサイトになるように日々改修中です。
+</div>
 
 <div class = "columns"> 
     <div class="column rss-column">
         <h2>新着ニュース</h2>
-        <h3>特別展の情報やアニメ作品のインタビュー記事を集めてます。</h3>
+        <p class="column-readme">
+            特別展の情報やアニメ作品のインタビュー記事を集めてます。
+        </p>
         <div class="colum-block">
             <h3 class="news-site-title">特別展・企画展情報</h3>
             <p class="colum-block-description">
@@ -81,7 +83,9 @@
     </div>
     <div class="column rss-column">
         <h2>おすすめ学術系サイト</h2>
-        <h3>学術系情報が纏められているサイトを集めてます。</h3>
+        <p class="column-readme">
+            学術系情報が纏められているサイトを集めてます。
+        </p>
 
         {% for site in rss %}
         <div class="colum-block">
@@ -118,8 +122,9 @@
 
     <div class="column rss-column">
         <h2>ブログ記事</h2>
-        <h3>管理人が読んだ本のレビューなどを載せてます。</h3>
-
+        <p class="column-readme">
+            管理人が読んだ本のレビューなどを載せてます。
+        </p>
         <div class="colum-block">
             <ul class="news-list blog-list">
             {% for p in blog[:5] %}
