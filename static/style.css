@@ -234,6 +234,8 @@ h1 {
 .news-list a.blog-title {
     color: #111;
     font-weight: 600;
+    text-decoration: none;
+    line-height: 1.4;
 }
 
 .blog-subtitle {
