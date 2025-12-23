@@ -174,16 +174,7 @@ def get_brave_news():
         print("Braveエラー:", e)
         return []
 
-#取得したリンクが重複していたら消す。
-def delduplicate_articles(articles):
-    seen = set()
-    unique_articles = []
-    for a in articles:
-        key = a.get("link") or a.get("title")
-        if key not in seen:
-            seen.add(key)
-            unique_articles.append(a)
-    return unique_articles
+
 
 
 #取得した記事は30分間ほど保持しておく
