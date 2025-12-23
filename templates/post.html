@@ -10,6 +10,11 @@
 <div class="post-wrapper">
   <h1>{{ post.title }}</h1>
 
+  {% if post.subtitle %}
+  <h2 class="post-subtitle">{{ post.subtitle }}</h2>
+{% endif %}
+
+
   {% if post.thumbnail %}
     <img src="{{ post.thumbnail }}" class="thumbnail">
   {% endif %}

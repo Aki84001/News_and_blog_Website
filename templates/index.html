@@ -120,6 +120,11 @@
                     <a href="/post/{{ p.id }}" class="blog-title">
                     {{ p.title }}
                     </a>
+                    {% if p.subtitle %}
+                    <p class="blog-subtitle">
+                        {{ p.subtitle }}
+                    </p>
+                    {% endif %}
                 </li>
                 {% endfor %}
             </ul>

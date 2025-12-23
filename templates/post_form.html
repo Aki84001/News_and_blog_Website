@@ -13,7 +13,9 @@
   <p>タイトル：
     <input type="text" name="title" value="{{ post.title if post }}">
   </p>
-
+  <p>サブタイトル：
+  <input type="text" name="subtitle" value="{{ post.subtitle if post }}">
+  </p>
   <p>本文：</p>
   <textarea name="content" rows="15">{{ post.content if post }}</textarea>
 

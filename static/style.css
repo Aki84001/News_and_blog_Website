@@ -230,3 +230,18 @@ h3 {
   display: none;
 }
 
+.post-subtitle {
+  font-size: 1.2em;
+  color: #666;
+  margin-top: 0.3em;
+  margin-bottom: 1em;
+}
+
+
+.blog-subtitle {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 0.2em;
+    line-height: 1.4;
+}
+これ以上派手にす

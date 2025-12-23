@@ -301,6 +301,8 @@ def new_post():
         post = {
             "id": next_id,
             "title": request.form["title"],
+            "subtitle": request.form.get("subtitle", ""),
+
             "thumbnail": request.form.get("thumbnail", ""),
             "tags": [t.strip() for t in request.form.get("tags", "").split(",") if t.strip()],
             "images": [i.strip() for i in request.form.get("images", "").split(",") if i.strip()],
@@ -340,6 +342,7 @@ def edit_post(post_id):
             return "Forbidden", 403
 
         post["title"] = request.form["title"]
+        post["subtitle"] = request.form.get("subtitle", "")
         post["content"] = request.form["content"]
 
         s3.put_object(
