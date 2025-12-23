@@ -145,10 +145,9 @@
                 <li class="blog-item">
                     {% if p.thumbnail %}
                     <a href="/post/{{ p.id }}">
-                        <img src="{{ p.thumbnail }}" class="blog-thumbnail">
+                        <img src="{{ p.thumbnail }}" class="">
                     </a>
                     {% endif %}
-
 
                     <a href="/post/{{ p.id }}" class="blog-title">
                     {{ p.title }}
