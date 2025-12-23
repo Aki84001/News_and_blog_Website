@@ -16,16 +16,6 @@ h1 {
   letter-spacing: 0.02em;
 }
 
-h2 {
-  font-size: 1.4em;
-  margin-top: 0em;
-}
-
-h3 {
-  font-size: 1.1em;
-  margin-top: 0em;
-}
-
 .columns {
     display: flex;
     gap: 24px;
@@ -38,6 +28,25 @@ h3 {
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
+
+.column > h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.3em;
+  padding-bottom: 0.2em;
+  border-bottom: 2px solid #e0e6ef;
+  color: #2c3e50;
+  letter-spacing: 0.02em;
+}
+
+.column-readme {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 0;
+  margin-bottom: 1em;
+  line-height: 1.6;
+}
+
 
 
 
@@ -99,7 +108,7 @@ h3 {
   background: #f2f4f7;
   border-left: 4px solid #999;
   color:initial;
-  font-style: Times New Roman;
+  font-style: "Times New Roman", serif;
 }
 
 
@@ -155,6 +164,12 @@ h3 {
     margin: 0.5em 0;
 }
 
+@media (max-width: 900px) {
+  .columns {
+    flex-direction: column;
+  }
+}
+
 .news-list {
     list-style: none;
     padding-left: 0;
@@ -207,12 +222,6 @@ h3 {
   margin-bottom: 1.2em;
 }
 
-.blog-thumb-large {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  border-radius: 6px;
-}
 
 .news-list a.blog-title {
     color: #111;
