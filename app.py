@@ -117,6 +117,30 @@ def get_serper_news():
         print("Serper.devエラー:", e)
         return []
 
+
+#get_brave_newsで呼び出す関数。記事一覧やまとめみたいなページまで持ってきてしまうので除外する
+def is_article_url(url: str) -> bool:
+    if not url:
+        return False
+
+    blacklist = [
+        "/tag/",
+        "/tags/",
+        "/category/",
+        "/categories/",
+        "index.html",
+        "details.php",
+        "/list/",
+        "?p=",
+        "?page=",
+        "/interview/index",
+    ]
+
+    return not any(bad in url for bad in blacklist)
+
+
+
+#brave
 def get_brave_news():
     headers = {
         "X-Subscription-Token": BRAVE_API_KEY,
@@ -136,7 +160,6 @@ def get_brave_news():
     
 
         data = response.json()
-        print(json.dumps(data, indent=2, ensure_ascii=False))
 
         articles = data.get("results", [])
 
@@ -144,13 +167,14 @@ def get_brave_news():
             normalize_brave(item)
             for item in articles
             if item.get("publisher") != "msn.com"
+            and is_article_url(item.get("url", ""))
         ]
 
     except Exception as e:
         print("Braveエラー:", e)
         return []
 
-
+#取得したリンクが重複していたら消す。
 def delduplicate_articles(articles):
     seen = set()
     unique_articles = []
@@ -161,6 +185,8 @@ def delduplicate_articles(articles):
             unique_articles.append(a)
     return unique_articles
 
+
+#取得した記事は30分間ほど保持しておく
 def get_cached_news():
     if NEWS_CACHE["updated"] and datetime.now() - NEWS_CACHE["updated"] < timedelta(minutes=30):
         return NEWS_CACHE["data"]
