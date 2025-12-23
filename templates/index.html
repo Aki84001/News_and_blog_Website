@@ -28,7 +28,9 @@
             特別展の情報やアニメ作品のインタビュー記事を集めてます。
         </p>
         <div class="colum-block">
-            <h3 class="news-site-title">特別展・企画展情報</h3>
+            <h3 class="colum-block-title">
+                特別展・企画展情報
+            </h3>
             <p class="colum-block-description">
                 博物館・美術館・研究機関による企画展・特別展の情報
             </p>
@@ -61,13 +63,13 @@
         </div>
         
         <div class="colum-block">
-        <h3 class="news-site-title">サブカル系インタビュー記事</h3>
+        <h3 class="colum-block-title">サブカル系インタビュー記事</h3>
         <p class="colum-block-description">
             アニメ・ゲームなどのインタビュー記事を集めてます
         </p>
 
         <ul class="news-list">
-            {% for article in subculture_news %}
+            {% for article in subculture_news[:3] %}
             <li>
                 <a href="{{ article.link }}" target="_blank" rel="noopener">
                     {{ article.title }}
@@ -75,6 +77,21 @@
             </li>
             {% endfor %}
         </ul>
+
+        {% if subculture_news|length > 3 %}
+        <details class="rss-more">
+            <summary>他 {{ subculture_news|length - 3 }} 件を見る</summary>
+            <ul class="news-list">
+                {% for article in subculture_news[3:] %}
+                <li>
+                    <a href="{{ article.link }}" target="_blank" rel="noopener">
+                        {{ article.title }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </details>
+        {% endif %}
         </div>
     
     </div>
