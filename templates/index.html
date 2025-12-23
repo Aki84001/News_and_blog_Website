@@ -35,7 +35,7 @@
             <p class="colum-block-description">
                 博物館・美術館・研究機関による企画展・特別展の情報
             </p>
-            
+
             <ul class="news-list">
                 {% for article in academic_news[:3] %}
                 <li>
@@ -45,7 +45,7 @@
                 </li>
                 {% endfor %}
             </ul>
-
+        
             {% if academic_news|length > 3 %}
             <details class="rss-more">
                 <summary>他 {{ academic_news|length - 3 }} 件を見る</summary>
@@ -61,25 +61,23 @@
             </details>
             {% endif %}
 
-
-            <div class="colum-block">
-            <h3 class="news-site-title">サブカル系インタビュー記事</h3>
-            <p class="colum-block-description">
-                アニメ・ゲームなどのインタビュー記事を集めてます
-            </p>
-
-            <ul class="news-list">
-                {% for article in subculture_news %}
-                <li>
-                    <a href="{{ article.link }}" target="_blank" rel="noopener">
-                        {{ article.title }}
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-            </div>
         </div>
+        <div class="colum-block">
+        <h3 class="news-site-title">サブカル系インタビュー記事</h3>
+        <p class="colum-block-description">
+            アニメ・ゲームなどのインタビュー記事を集めてます
+        </p>
 
+        <ul class="news-list">
+            {% for article in subculture_news %}
+            <li>
+                <a href="{{ article.link }}" target="_blank" rel="noopener">
+                    {{ article.title }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        </div>
         
         <div class="column rss-column">
             <h2>おすすめ学術系サイト</h2>
