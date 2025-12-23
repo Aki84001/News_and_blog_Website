@@ -3,16 +3,35 @@ body {
     -apple-system,
     BlinkMacSystemFont,
     "Hiragino Sans",
-    "Hiragino Kaku Gothic ProN",
     "Yu Gothic",
-    "Yu Gothic UI",
-    "Meiryo",
     sans-serif;
   background: #fafafa;
   margin: 20px;
   line-height: 1.75;
   color: #222;
 }
+
+h1, h2, h3 {
+ font-family: "Inter", 
+ "Hiragino Sans", 
+ "Yu Gothic", 
+ sans-serif;
+  letter-spacing: 0.02em;
+}
+
+h2 {
+  font-size: 1.4em;
+  margin-top: 2em;
+}
+
+h3 {
+  font-size: 1.1em;
+  margin-top: 1.5em;
+}
+
+
+
+
 .columns {
     display: flex;
     gap: 24px;
@@ -55,6 +74,10 @@ body {
     line-height: 1.8;
     word-break: break-word;
     white-space: normal;
+    font-size: 0.95rem;
+  line-height: 1.9;
+  letter-spacing: 0.01em;
+
 }
 
 .article-content h2 {
