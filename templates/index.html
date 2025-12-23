@@ -22,7 +22,7 @@
 </div>
 
 <div class = "columns"> 
-    <div class="column rss-column">
+    <div class="column ">
         <h2>新着ニュース</h2>
         <p class="column-readme">
             特別展の情報やアニメ作品のインタビュー記事を集めてます。
@@ -46,7 +46,7 @@
             </ul>
         
             {% if academic_news|length > 3 %}
-            <details class="rss-more">
+            <details class="read-more">
                 <summary>他 {{ academic_news|length - 3 }} 件を見る</summary>
                 <ul class="news-list">
                     {% for article in academic_news[3:] %}
@@ -79,7 +79,7 @@
         </ul>
 
         {% if subculture_news|length > 3 %}
-        <details class="rss-more">
+        <details class="read-more">
             <summary>他 {{ subculture_news|length - 3 }} 件を見る</summary>
             <ul class="news-list">
                 {% for article in subculture_news[3:] %}
@@ -95,7 +95,7 @@
         </div>
     
     </div>
-    <div class="column rss-column">
+    <div class="column ">
         <h2>おすすめ学術系サイト</h2>
         <p class="column-readme">
             学術系情報が纏められているサイトを集めてます。
@@ -117,7 +117,7 @@
             </ul>
 
             {% if site.articles|length > 3 %}
-            <details class="rss-more">
+            <details class="read-more">
                 <summary>他 {{ site.articles|length - 3 }} 件を見る</summary>
                 <ul class="news-list">
                     {% for article in site.articles[3:] %}
@@ -134,7 +134,7 @@
         {% endfor %}
     </div>
 
-    <div class="column rss-column">
+    <div class="column ">
         <h2>ブログ記事</h2>
         <p class="column-readme">
             管理人が読んだ本のレビューなどを載せてます。
