@@ -142,7 +142,7 @@
         <div class="colum-block">
             <ul class="news-list">
             {% for p in blog[:5] %}
-                <li class="blog-item">
+                <li >
                     {% if p.thumbnail %}
                     <a href="/post/{{ p.id }}">
                         <img src="{{ p.thumbnail }}" class="blog-thumbnail">
