@@ -1,7 +1,17 @@
 body {
-  font-family: sans-serif;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN",
+    "Yu Gothic",
+    "Yu Gothic UI",
+    "Meiryo",
+    sans-serif;
   background: #fafafa;
   margin: 20px;
+  line-height: 1.75;
+  color: #222;
 }
 .columns {
     display: flex;
