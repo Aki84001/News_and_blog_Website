@@ -341,6 +341,7 @@ def edit_post(post_id):
         if request.form["password"] != ADMIN_PASSWORD:
             return "Forbidden", 403
 
+        post["thumbnail"] = request.form.get("thumbnail", "")
         post["title"] = request.form["title"]
         post["subtitle"] = request.form.get("subtitle", "")
         post["content"] = request.form["content"]
