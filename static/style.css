@@ -219,8 +219,16 @@ h1 {
 }
 
 .blog-item {
-  margin-bottom: 1.2em;
+  display: flex;
+  gap: 0.6em;
+  align-items: flex-start;
 }
+
+.blog-thumbnail {
+  width: 100px;
+  flex-shrink: 0;
+}
+
 
 
 .news-list a.blog-title {
