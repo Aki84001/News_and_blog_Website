@@ -94,7 +94,7 @@ def get_serper_news():
     after_date = (datetime.now() - timedelta(days=3)).strftime("%Y-%m-%d")
 
     # クエリ文字列を組み立てる
-    query = f"(企画展 OR 特別展) after:{after_date}"
+    query = f"((企画展 OR 特別展) AND 東京) after:{after_date}"
 
     payload = {"q": query, "num": 20}  # num=取得件数
 
