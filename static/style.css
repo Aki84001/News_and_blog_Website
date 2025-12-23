@@ -220,18 +220,16 @@ h3 {
   border-radius: 6px;
 }
 
-.blog-title {
-  display: block;
-  color: #000000;
-  font-size: 1em;
-  line-height: 1.5;
+.news-list a.blog-title {
+    color: #111;
+    font-weight: 600;
 }
 
 .blog-subtitle {
-    font-size: 0.9em;
-    color: #000000;
-    margin-top: 0.2em;
-    line-height: 1.4;
+    font-size: 0.85em;
+    color: #777;
+    margin-top: 0.15em;
+    line-height: 1.3;
 }
 
 
