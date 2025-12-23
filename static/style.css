@@ -18,16 +18,13 @@ h1 {
 
 h2 {
   font-size: 1.4em;
-  margin-top: 2em;
+  margin-top: 0em;
 }
 
 h3 {
   font-size: 1.1em;
-  margin-top: 1.5em;
+  margin-top: 0em;
 }
-
-
-
 
 .columns {
     display: flex;
@@ -98,14 +95,10 @@ h3 {
   padding: 0.8em 1em;
   background: #f2f4f7;
   border-left: 4px solid #999;
-  color: #1111cff7;
+  color:initial;
   font-style: Times New Roman;
 }
 
-.article-content blockquote p {
-  margin: 0;
-  color: #ebb37bf7;
-}
 
 .article-content p {
   margin: 1em 0;
