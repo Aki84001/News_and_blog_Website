@@ -62,6 +62,7 @@
             {% endif %}
 
         </div>
+        
         <div class="colum-block">
         <h3 class="news-site-title">サブカル系インタビュー記事</h3>
         <p class="colum-block-description">
@@ -78,18 +79,32 @@
             {% endfor %}
         </ul>
         </div>
-        
-        <div class="column rss-column">
-            <h2>おすすめ学術系サイト</h2>
-            <h3>学術系情報が纏められているサイトを集めてます。</h3>
+    
+    </div>
+    <div class="column rss-column">
+        <h2>おすすめ学術系サイト</h2>
+        <h3>学術系情報が纏められているサイトを集めてます。</h3>
 
-            {% for site in rss %}
-            <div class="colum-block">
-                <h3 class="colum-block-title">{{ site.site_name }}</h3>
-                <p class="colum-block-description">{{ site.description }}</p>
+        {% for site in rss %}
+        <div class="colum-block">
+            <h3 class="colum-block-title">{{ site.site_name }}</h3>
+            <p class="colum-block-description">{{ site.description }}</p>
 
+            <ul class="news-list">
+                {% for article in site.articles[:3] %}
+                <li>
+                    <a href="{{ article.link }}" target="_blank" rel="noopener">
+                        {{ article.title }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+
+            {% if site.articles|length > 3 %}
+            <details class="rss-more">
+                <summary>他 {{ site.articles|length - 3 }} 件を見る</summary>
                 <ul class="news-list">
-                    {% for article in site.articles[:3] %}
+                    {% for article in site.articles[3:] %}
                     <li>
                         <a href="{{ article.link }}" target="_blank" rel="noopener">
                             {{ article.title }}
@@ -97,50 +112,36 @@
                     </li>
                     {% endfor %}
                 </ul>
-
-                {% if site.articles|length > 3 %}
-                <details class="rss-more">
-                    <summary>他 {{ site.articles|length - 3 }} 件を見る</summary>
-                    <ul class="news-list">
-                        {% for article in site.articles[3:] %}
-                        <li>
-                            <a href="{{ article.link }}" target="_blank" rel="noopener">
-                                {{ article.title }}
-                            </a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </details>
-                {% endif %}
-            </div>
-            {% endfor %}
+            </details>
+            {% endif %}
         </div>
+        {% endfor %}
+    </div>
 
-        <div class="column rss-column">
+    <div class="column rss-column">
         <h2>ブログ記事</h2>
         <h3>管理人が読んだ本のレビューなどを載せてます。</h3>
 
-            <div class="colum-block">
-                <ul class="news-list blog-list">
-                {% for p in blog[:5] %}
-                    <li class="blog-item">
-                        {% if p.thumbnail %}
-                        <a href="/post/{{ p.id }}">
-                            <img src="{{ p.thumbnail }}" class="blog-thumb-large">
-                        </a>
-                        {% endif %}
-                        <a href="/post/{{ p.id }}" class="blog-title">
-                        {{ p.title }}
-                        </a>
-                        {% if p.subtitle %}
-                        <p class="blog-subtitle">
-                            {{ p.subtitle }}
-                        </p>
-                        {% endif %}
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
+        <div class="colum-block">
+            <ul class="news-list blog-list">
+            {% for p in blog[:5] %}
+                <li class="blog-item">
+                    {% if p.thumbnail %}
+                    <a href="/post/{{ p.id }}">
+                        <img src="{{ p.thumbnail }}" class="blog-thumb-large">
+                    </a>
+                    {% endif %}
+                    <a href="/post/{{ p.id }}" class="blog-title">
+                    {{ p.title }}
+                    </a>
+                    {% if p.subtitle %}
+                    <p class="blog-subtitle">
+                        {{ p.subtitle }}
+                    </p>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 </div>
