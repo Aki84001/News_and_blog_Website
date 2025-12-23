@@ -224,7 +224,6 @@ h1 {
 
 .blog-thumbnail {
   width: 100%;
-  max-width: 260px;
   height: auto;
   display: block;
   margin: 0 0 0.4em;
