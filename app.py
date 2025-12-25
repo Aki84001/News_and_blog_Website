@@ -428,7 +428,11 @@ def admin_logout():
 def internal_error(e):
     return render_template("500.html"), 500
 
-
+@app.after_request
+def add_headers(resp):
+    resp.headers["X-Frame-Options"] = "DENY"
+    resp.headers["X-Content-Type-Options"] = "nosniff"
+    return resp
 
 
 
