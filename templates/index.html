@@ -108,7 +108,13 @@
 
         {% for site in rss %}
         <div class="colum-block">
-            <h3 class="colum-block-title">{{ site.site_name }}</h3>
+            <div class="colum-block-title-wrapper">
+                <h3 class="colum-block-title">{{ site.site_name }}</h3>
+                 {% if site.icon_url %}
+                    <img src="{{ site.icon_url }}" alt="アイコン" class="title-icon">
+                {% endif %}
+            </div>
+ 
             <p class="colum-block-description">{{ site.description }}</p>
 
             <ul class="news-list">

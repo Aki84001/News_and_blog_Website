@@ -222,18 +222,22 @@ RSS_SITES = {
     "ナゾロジー": {
         "url": "https://nazology.kusuguru.co.jp/feed",
         "description": "科学ニュースや不思議なトピックを分かりやすく紹介するライトな科学メディアです！  一番良く見てます",
-        "limit": 10
+        "limit": 10,
+        "icon": "framingo.jpg"
+
     },
     "Nature Asia": {
         "url": "https://www.natureasia.com/ja-jp/rss/nature",
         "description": "Nature の日本語圏向けニュースと研究紹介のハイライトです。",
-        "limit": 100
+        "limit": 100,
+        "icon": "hasibiro.jpg"
     },
 
     "JSTAGE": {
         "url": "https://www.jstage.jst.go.jp/AF02S010Download?cdRss=003&rssLang=ja",
         "description": "JSTAGEという日本の論文が集められたサイトで直近学会誌を出した団体の一覧です。ものによってはフリーじゃなかったりするんで見れないやつもあるかもです・・・。",
-        "limit": 100
+        "limit": 100,
+        "icon": "dacyou.jpg"
     }
 }
 
@@ -287,10 +291,14 @@ def get_rss_articles():
             if len(site_articles) >= info["limit"]:
                 break
 
+        # S3 の画像 URL をセット
+        icon_url = s3_image(f"/images/{info['icon']}")
+
         results.append({
             "site_name": site_name,
             "description": info["description"],
-            "articles": site_articles
+            "articles": site_articles,
+            "icon_url": icon_url
         })
 
     return results
