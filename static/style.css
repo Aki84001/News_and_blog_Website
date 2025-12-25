@@ -153,19 +153,17 @@ h1 {
     display: flex;
     padding-top: 0;
     margin-top: 0;   /* 上の余白を消す */
-   align-items: flex-start; /* 文字上端を揃える */
+    align-items: flex-start; /* 文字上端を揃える */
 
 }
 
 .colum-block-title {
-    vertical-align: baseline;
     font-size: 1.1em;
     font-weight: bold;
     cursor: pointer;
     color: #4a6fa5;
-    align-items: flex-start;
     margin-block-start: 0em;
-
+    line-height: 1;  /* 不要な余白を削除 */
     
 }
 
