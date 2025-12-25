@@ -292,7 +292,7 @@ def get_rss_articles():
                 break
 
         # S3 の画像 URL をセット
-        icon_url = s3_image(f"/images/{info['icon']}")
+        icon_url = s3_image(f"images/{info['icon']}")
 
         results.append({
             "site_name": site_name,
