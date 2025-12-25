@@ -143,8 +143,6 @@ h1 {
     margin-bottom: 1em;
     padding: 0.5em;
     background: #ffffff;
-    border-left: 4px solid #4a6fa5;
-    border-left: none; /* 元のブロック全体の縦線を消す */
     border-radius: 4px;
 }
 
@@ -157,6 +155,13 @@ h1 {
     width: 4px;
     background-color: #4a6fa5;
 }
+
+.colum-block-content {
+    border-left: 4px solid #4a6fa5; /* 縦線はコンテンツ部分だけ */
+    padding-left: 0.5em;             /* 少し間をあける */
+}
+
+
 
 
 
