@@ -162,6 +162,7 @@ h1 {
     cursor: pointer;
     color: #4a6fa5;
     margin: 0;        /* 上下の余白を完全に消す */
+    align-items: flex-start;
 
     
 }
