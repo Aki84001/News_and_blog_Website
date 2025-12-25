@@ -141,6 +141,7 @@ h1 {
 
 .colum-block {
     margin-bottom: 1em;
+    margin-top: 0;   /* 上の余白を消す */
     padding: 0.5em;
     background: #ffffff;
     border-radius: 4px;
