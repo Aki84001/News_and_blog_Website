@@ -399,7 +399,7 @@ def admin_login():
     if request.method == "POST":
         if request.form.get("password") == ADMIN_LOGIN_KEY:
             session["admin"] = True
-            return redirect("/admin/new")
+            return redirect("/")
         return "Forbidden", 403
 
     return render_template("admin_login.html")
