@@ -16,16 +16,21 @@ app = Flask(__name__)
 #
 after_date = (datetime.now() - timedelta(days=3)).strftime("%Y-%m-%d")
 
-
+#ニュースAPIのurlとシークレットキー
 SERPER_API_KEY = os.getenv("SERPER_API_KEY")
 BRAVE_API_KEY = os.getenv("BRAVE_API_KEY")
 SERPER_API_URL = os.getenv("SERPER_API_URL")
 BRAVE_NEWS_URL = os.getenv("BRAVE_NEWS_URL")
-ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
+
+#AWSの資材置き場
 S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")
-ADMIN_LOGIN_KEY = os.getenv("FLASK_SECRET_KEY")
 S3_BLOG_FILE = "blog_posts.json"
 S3_REGION = "ap-northeast-1"
+
+#管理者ログイン用パス
+ADMIN_LOGIN_KEY = os.getenv("ADMIN_LOGIN_KEY")
+app.secret_key = os.getenv("SECRET_KEY")
+
 
 NEWS_CACHE = {
     "data": None,
@@ -286,10 +291,6 @@ def reflect_changeresult_of_blog_posts(posts):
         ContentType="application/json"
     )
 
-def require_admin():
-    if not session.get("admin"):
-        return False
-    return True
 
 
 
@@ -313,9 +314,8 @@ def index():
 @app.route("/admin/new", methods=["GET", "POST"])
 def new_post():
 
-    check = admin_required()
-    if check:
-        return check
+    if not session.get("admin"):
+        return redirect("/admin/login")
 
     if request.method == "POST":
         posts = load_blog_posts()
@@ -358,9 +358,8 @@ def show_post(post_id):
 def edit_post(post_id):
     posts = load_blog_posts()
 
-    check = admin_required()
-    if check:
-        return check
+    if not session.get("admin"):
+        return redirect("/admin/login")
 
     post = next((p for p in posts if p["id"] == post_id), None)
     if not post:
@@ -398,7 +397,7 @@ def delete_post(post_id):
 @app.route("/admin/login", methods=["GET", "POST"])
 def admin_login():
     if request.method == "POST":
-        if request.form.get("password") == ADMIN_PASSWORD:
+        if request.form.get("password") == ADMIN_LOGIN_KEY:
             session["admin"] = True
             return redirect("/admin/new")
         return "Forbidden", 403
