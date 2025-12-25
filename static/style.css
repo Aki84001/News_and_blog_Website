@@ -144,21 +144,7 @@ h1 {
     padding: 0.5em;
     background: #ffffff;
     border-radius: 4px;
-}
-
-.colum-block::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background-color: #4a6fa5;
-}
-
-.colum-block-content {
-    border-left: 4px solid #4a6fa5; /* 縦線はコンテンツ部分だけ */
-    padding-left: 0.5em;             /* 少し間をあける */
+    border-left: 4px solid #4a6fa5;
 }
 
 
