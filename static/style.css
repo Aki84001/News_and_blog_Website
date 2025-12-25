@@ -250,3 +250,13 @@ h1 {
 
 
 
+.colum-block-title-wrapper {
+    display: flex;         /* 横並びにする */
+    align-items: center;   /* 高さを揃える */
+    gap: 8px;              /* 画像とタイトルの間隔 */
+}
+
+.title-icon {
+    width: 32px;           /* 好きなサイズに調整 */
+    height: auto;          /* 比率維持 */
+}

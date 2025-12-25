@@ -18,22 +18,24 @@
 </p>
 
 <div class="site-discription">
-主に学術系の情報を集めるニュースサイトです。特別展の開催情報
-画面左は
-</div>
+興味を持っている分野の情報を纏めて取得出来たら楽でいいな、と管理人が考えて作った個人ニュースサイトです。
+博物館・美術館のイベント情報や学術系の新発見など真面目なものに加えて、アニメのインタビュー記事など軽いものも集めてます。後は集めてくるだけってのも物足りないので、管理人が読んで面白かった学術書のレビューなども載せてたりします。</div>
 
 <div class = "columns"> 
     <div class="column ">
-        <h2>新着ニュース</h2>
+        <h2>新着情報</h2>
         <p class="column-readme">
-            特別展の情報やアニメ作品のインタビュー記事を集めてます。
+            外部APIを使ってジャンルごとに情報を集めてます。
         </p>
         <div class="colum-block">
-            <h3 class="colum-block-title">
-                特別展・企画展情報
-            </h3>
+    <img src="{{ s3('suzume.jpg') }}" alt="シルエット" class="title-icon">
+            <div class="colum-block-title-wrapper">
+                <h3 class="colum-block-title">
+                    特別展・企画展情報
+                </h3>
+            </div>
             <p class="colum-block-description">
-                博物館・美術館・研究機関による企画展・特別展の情報
+                東京で今開催されている特別展の情報を集めてます。
             </p>
 
             <ul class="news-list">
@@ -64,9 +66,9 @@
         </div>
         
         <div class="colum-block">
-        <h3 class="colum-block-title">サブカル系インタビュー記事</h3>
+        <h3 class="colum-block-title">サブカル系ニュース</h3>
         <p class="colum-block-description">
-            アニメ・ゲームなどのインタビュー記事を集めてます
+            アニメ・ゲームなどの新着情報やインタビュー記事を集めてます
         </p>
 
         <ul class="news-list">
@@ -97,9 +99,9 @@
     
     </div>
     <div class="column ">
-        <h2>おすすめ学術系サイト</h2>
+        <h2>学術系サイト新着記事</h2>
         <p class="column-readme">
-            学術系情報が纏められているサイトを集めてます。
+            学術系記事を配信しているサイトを集めてます。なんとなく勉強したい気分の時におすすめ！！ 良質な情報がただで得られます。
         </p>
 
         {% for site in rss %}
