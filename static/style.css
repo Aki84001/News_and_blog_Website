@@ -144,8 +144,21 @@ h1 {
     padding: 0.5em;
     background: #ffffff;
     border-left: 4px solid #4a6fa5;
+    border-left: none; /* 元のブロック全体の縦線を消す */
     border-radius: 4px;
 }
+
+.colum-block::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: #4a6fa5;
+}
+
+
 
 .colum-block-title {
     font-size: 1.1em;
