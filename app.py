@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect,session
 import requests
 import feedparser
 import json, os
@@ -23,6 +23,7 @@ SERPER_API_URL = os.getenv("SERPER_API_URL")
 BRAVE_NEWS_URL = os.getenv("BRAVE_NEWS_URL")
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
 S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")
+ADMIN_LOGIN_KEY = os.getenv("FLASK_SECRET_KEY")
 S3_BLOG_FILE = "blog_posts.json"
 S3_REGION = "ap-northeast-1"
 
@@ -192,6 +193,11 @@ def get_cached_news():
     NEWS_CACHE["updated"] = datetime.now()
     return data
 
+def admin_required():
+    if not session.get("admin"):
+        return redirect("/admin/login")
+
+
 
 
 # ====== RSSの設定 ======
@@ -272,6 +278,20 @@ def get_rss_articles():
 
     return results
 
+def reflect_changeresult_of_blog_posts(posts):
+    s3.put_object(
+        Bucket=S3_BUCKET_NAME,
+        Key=S3_BLOG_FILE,
+        Body=json.dumps(posts, ensure_ascii=False, indent=2).encode("utf-8"),
+        ContentType="application/json"
+    )
+
+def require_admin():
+    if not session.get("admin"):
+        return False
+    return True
+
+
 
 
 # ====== Flaskルート ======
@@ -289,10 +309,13 @@ def index():
         blog=posts_sorted
     )
 
-@app.route("/new", methods=["GET", "POST"])
+#記事の投稿画面
+@app.route("/admin/new", methods=["GET", "POST"])
 def new_post():
-    if request.form.get("password") != ADMIN_PASSWORD:
-        return "Forbidden", 403
+
+    check = admin_required()
+    if check:
+        return check
 
     if request.method == "POST":
         posts = load_blog_posts()
@@ -314,7 +337,7 @@ def new_post():
         return redirect(f"/post/{next_id}")
     return render_template("post_form.html")
 
-
+#記事の表示画面
 @app.route("/post/<int:post_id>")
 def show_post(post_id):
     posts = load_blog_posts()
@@ -330,17 +353,20 @@ def show_post(post_id):
 
     return render_template("post.html", post=target, html_content=html_body)
 
-@app.route("/edit/<int:post_id>", methods=["GET", "POST"])
+#記事の編集画面
+@app.route("/admin/edit/<int:post_id>", methods=["GET", "POST"])
 def edit_post(post_id):
     posts = load_blog_posts()
+
+    check = admin_required()
+    if check:
+        return check
+
     post = next((p for p in posts if p["id"] == post_id), None)
     if not post:
         return "Not Found", 404
 
     if request.method == "POST":
-        if request.form["password"] != ADMIN_PASSWORD:
-            return "Forbidden", 403
-
         post["thumbnail"] = request.form.get("thumbnail", "")
         post["title"] = request.form["title"]
         post["subtitle"] = request.form.get("subtitle", "")
@@ -356,11 +382,12 @@ def edit_post(post_id):
 
     return render_template("post_form.html", post=post)
 
-
-@app.route("/delete/<int:post_id>", methods=["POST"])
+#記事の削除画面
+@app.route("/admin/delete/<int:post_id>", methods=["POST"])
 def delete_post(post_id):
-    if request.form.get("password") != ADMIN_PASSWORD:
-        return "Forbidden", 403
+    check = admin_required()
+    if check:
+        return check
 
     posts = load_blog_posts()
     posts = [p for p in posts if p["id"] != post_id]
@@ -368,14 +395,22 @@ def delete_post(post_id):
     reflect_changeresult_of_blog_posts(posts)
     return redirect("/")
 
+@app.route("/admin/login", methods=["GET", "POST"])
+def admin_login():
+    if request.method == "POST":
+        if request.form.get("password") == ADMIN_PASSWORD:
+            session["admin"] = True
+            return redirect("/admin/new")
+        return "Forbidden", 403
 
-def reflect_changeresult_of_blog_posts(posts):
-    s3.put_object(
-        Bucket=S3_BUCKET_NAME,
-        Key=S3_BLOG_FILE,
-        Body=json.dumps(posts, ensure_ascii=False, indent=2).encode("utf-8"),
-        ContentType="application/json"
-    )
+    return render_template("admin_login.html")
+
+
+@app.route("/admin/logout")
+def admin_logout():
+    session.clear()
+    return redirect("/")
+
 
 
 
