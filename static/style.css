@@ -252,7 +252,7 @@ h1 {
 
 .colum-block-title-wrapper {
     display: flex;         /* 横並びにする */
-    align-items: center;   /* 高さを揃える */
+    align-items: baseline;  /* 下端を揃える */
     gap: 8px;              /* 画像とタイトルの間隔 */
 }
 
