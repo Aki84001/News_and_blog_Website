@@ -153,7 +153,7 @@ h1 {
     display: flex;
     align-items: flex-start; /* 文字上端を揃える */
     gap: 8px;
-    margin-top: -4px; /* 画像が少し上にはみ出すように調整 */
+    margin-top: 0;   /* 上の余白を消す */
 }
 
 .colum-block-title {
@@ -162,6 +162,7 @@ h1 {
     cursor: pointer;
     color: #4a6fa5;
     margin-top: 0px;
+    
 }
 
 .colum-block-title:hover {
