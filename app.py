@@ -310,17 +310,7 @@ def reflect_changeresult_of_blog_posts(posts):
 # ====== Flaskルート ======
 @app.route("/")
 def index():
-    news = get_cached_news()
-    rss_articles = get_rss_articles()
-    blog_posts = load_blog_posts()
-    posts_sorted = sorted(blog_posts, key=lambda x: x["id"], reverse=True)    
-    return render_template(
-        "index.html",
-        academic_news=news["academic"],
-        subculture_news=news["subculture"],
-        rss=rss_articles,
-        blog=posts_sorted
-    )
+    1 / 0
 
 #記事の投稿画面
 @app.route("/admin/new", methods=["GET", "POST"])
