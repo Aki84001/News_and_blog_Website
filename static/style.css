@@ -151,7 +151,6 @@ h1 {
 
 .colum-block-title-wrapper {
     display: flex;
-    padding-top: 0;
     align-items: flex-start; /* 文字上端を揃える */
 
 }
@@ -161,8 +160,7 @@ h1 {
     font-weight: bold;
     cursor: pointer;
     color: #4a6fa5;
-    margin-block-start: 0em;
-    line-height: 1;  /* 不要な余白を削除 */
+
     
 }
 
