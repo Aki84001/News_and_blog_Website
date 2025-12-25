@@ -152,7 +152,6 @@ h1 {
 .colum-block-title-wrapper {
     display: flex;
     padding-top: 0;
-    margin-top: 0;   /* 上の余白を消す */
     align-items: flex-start; /* 文字上端を揃える */
 
 }
