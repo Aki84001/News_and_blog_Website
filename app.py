@@ -8,13 +8,25 @@ import boto3
 from dotenv import load_dotenv
 load_dotenv()
 import os
+import logging
+
+
 
 
 s3 = boto3.client("s3")
 app = Flask(__name__)
 
-#
+
 after_date = (datetime.now() - timedelta(days=3)).strftime("%Y-%m-%d")
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(message)s"
+)
+
+logging.info("Saved to S3 OK")
+logging.error("S3 save error", exc_info=True)
+
 
 #ニュースAPIのurlとシークレットキー
 SERPER_API_KEY = os.getenv("SERPER_API_KEY")
@@ -409,6 +421,14 @@ def admin_login():
 def admin_logout():
     session.clear()
     return redirect("/")
+
+
+@app.errorhandler(500)
+def internal_error(e):
+    return render_template("500.html"), 500
+
+
+
 
 
 
