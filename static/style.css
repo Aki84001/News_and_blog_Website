@@ -142,7 +142,9 @@ h1 {
 .colum-block {
     margin-bottom: 1em;
     margin-top: 0;   /* 上の余白を消す */
-    padding: 0.5em;
+    padding-top: 0.5em;      /* 上端にタイトルを寄せたい場合は調整 */
+    padding-bottom: 0.5em;
+    padding-left: 0.5em;
     background: #ffffff;
     border-radius: 4px;
     border-left: 4px solid #4a6fa5;
