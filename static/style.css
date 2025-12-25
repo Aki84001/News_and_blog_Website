@@ -153,7 +153,7 @@ h1 {
     display: flex;
     padding-top: 0;
     margin-top: 0;   /* 上の余白を消す */
-/*    align-items: flex-start; /* 文字上端を揃える */
+   align-items: flex-start; /* 文字上端を揃える */
 }
 
 .colum-block-title {
@@ -161,7 +161,7 @@ h1 {
     font-weight: bold;
     cursor: pointer;
     color: #4a6fa5;
-    margin: 0;        /* 上下の余白を完全に消す */
+   margin: 0 !important;
     align-items: flex-start;
 
     
