@@ -147,9 +147,12 @@ h1 {
     border-left: 4px solid #4a6fa5;
 }
 
-
-
-
+.colum-block-title-wrapper {
+    display: flex;
+    align-items: flex-start; /* 文字上端を揃える */
+    gap: 8px;
+    margin-top: -4px; /* 画像が少し上にはみ出すように調整 */
+}
 
 .colum-block-title {
     font-size: 1.1em;
@@ -261,6 +264,7 @@ h1 {
 }
 
 .title-icon {
-    width: 32px;           /* 好きなサイズに調整 */
-    height: auto;          /* 比率維持 */
+    width: 32px;
+    height: auto;
+    margin-top: -8px; /* 文字より上にはみ出す */
 }
